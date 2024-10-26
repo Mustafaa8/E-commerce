@@ -1,6 +1,4 @@
 import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
-import { Seller } from "./Seller";
-
 
 @Entity({name:"Products"})
 export class Product {
@@ -19,6 +17,6 @@ export class Product {
     @Column()
     category:string;
 
-    @Column((type)=>Seller)
-    seller:Seller;
+    @Column()
+    discount:number;
 }

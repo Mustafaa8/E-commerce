@@ -27,7 +27,7 @@ export class UsersService {
     }
     async createUser(userPayload:CreateUserParams){
         const hashedPassword = await this.hashPassword(userPayload.password)
-        const user = this.userRepo.create({...userPayload,password:hashedPassword,cart:new Cart()})
+        const user = this.userRepo.create({...userPayload,password:hashedPassword})
         return this.userRepo.save(user)
     }
     updateUser(userId:ObjectId,userPayload:UpdateUserParams){

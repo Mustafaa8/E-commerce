@@ -1,9 +1,11 @@
-import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, ObjectId, ObjectIdColumn, Repository } from "typeorm";
 import { Cart } from "./Cart";
 import { Exclude } from "class-transformer";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Entity({name:"users"})
 export class User {
+    constructor(@InjectRepository(Cart) private cartRepo:Repository<Cart>){}
     @ObjectIdColumn()
     _id:ObjectId;
 
@@ -21,4 +23,10 @@ export class User {
     
     @Column((type)=>Cart)
     cart:Cart
+
+    @BeforeInsert()
+    createCart(){
+        const cart = this.cartRepo.create({})
+        this.cart=cart
+    }
 }

@@ -15,3 +15,11 @@ export type LoginParams = {
     email:string,
     password:string
 }
+
+export type ProductDataParams ={
+    name:string,
+    price:number,
+    rating:number,
+    category:string,
+    discount:number
+}

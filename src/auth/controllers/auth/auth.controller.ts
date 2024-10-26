@@ -13,6 +13,6 @@ export class AuthController {
     @UseGuards(AuthGuard)
     async protected(@Req() req:Request){
         const user = (await req['user'])
-        return {"msg":"You Are Here","user":user,"admin":user.Admin}
+        return {"msg":"You Are Here","user":user}
     }
 }
