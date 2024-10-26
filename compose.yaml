@@ -1,0 +1,7 @@
+services:
+  mongoDatabase:
+    image: mongo:latest
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
