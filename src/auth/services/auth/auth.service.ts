@@ -25,7 +25,7 @@ export class AuthService {
         if(!isValidPass){
             return new HttpException('Wrong Credentials',HttpStatus.BAD_REQUEST)
         }
-        const payload = {userId : user._id , Admin:user.isAdmin}
+        const payload = {userId : user._id , isAdmin:user.isAdmin}
         return {
             accessToken : await this.jwtService.signAsync(payload)
         }

@@ -1,3 +1,5 @@
+import { ObjectId } from "typeorm"
+
 export type CreateUserParams = {
     username:string,
     email:string,
@@ -22,4 +24,9 @@ export type ProductDataParams ={
     rating:number,
     category:string,
     discount:number
+}
+
+export type JwtPayload = {
+    userId:string,
+    Admin:boolean
 }

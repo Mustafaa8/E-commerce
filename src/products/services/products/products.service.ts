@@ -10,9 +10,9 @@ export class ProductsService {
     async getall(){
         return await this.productRepo.find()
     }
-    async getByName(productName:string){
-        return await this.productRepo.find({
-            where:{name: Like(`%${productName}%`)},
+    getByName(productName:string){
+        return this.productRepo.find({
+            where:{name: productName},
         })
     }
     async addProduct(productData:ProductDataParams){

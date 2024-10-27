@@ -13,8 +13,8 @@ export class ProductsController {
         return this.productServices.getall()
     }
     @Get(":name")
-    getProductByName(@Param('name') productName:string){
-        return this.productServices.getByName(productName)
+    async getProductByName(@Param('name') productName:string){
+        return await this.productServices.getByName(productName)
     }
     @Post()
     @UseGuards(AdminingGuard)

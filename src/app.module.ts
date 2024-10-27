@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
+import { CartModule } from './cart/cart.module';
 
 
 @Module({
@@ -24,7 +25,7 @@ import { AuthModule } from './auth/auth.module';
     global:true,
     secret:process.env.JWT_SECRET,
     signOptions:{expiresIn:'2h'}
-  })  , UsersModule, ProductsModule, AuthModule],
+  })  , UsersModule, ProductsModule, AuthModule, CartModule],
   controllers: [],
   providers: [AppService],
 })

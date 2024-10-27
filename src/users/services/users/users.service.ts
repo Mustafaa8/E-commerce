@@ -1,10 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm/entities/User';
 import { Repository } from 'typeorm';
 import { ObjectId } from 'mongodb';
 import { Cart } from 'src/typeorm/entities/Cart';
-import { CreateUserParams, LoginParams, UpdateUserParams } from 'src/utils/types';
+import { CreateUserParams, JwtPayload, UpdateUserParams } from 'src/utils/types';
 import {JwtService} from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 
@@ -17,6 +17,12 @@ export class UsersService {
     async hashPassword(password:string){
         const hash = await bcrypt.hash(password,10)
         return hash
+    }
+    async payloadExtracting(payload:Promise<JwtPayload>){
+        const payloadRes = await payload
+        const {userId,Admin} = payloadRes
+        const user = await this.userRepo.findOne({where:{_id:new ObjectId(userId)}})
+        return {user,Admin}
     }
     fetchUsers(){
         return this.userRepo.find()
@@ -39,5 +45,9 @@ export class UsersService {
     deleteUser(userId:ObjectId){
         return this.userRepo.delete({_id:userId})
     }
-
+    async getCart(payload:Promise<JwtPayload>){
+        const {user,Admin} = await this.payloadExtracting(payload)
+        return user.cart
+    }
+    
 }
