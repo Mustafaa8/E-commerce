@@ -62,4 +62,11 @@ export class CartService {
         await this.userRepo.update({_id:user._id},user);
         return user.cart
     }
+    async clearCart(payload:Promise<JwtPayload>){
+        const {user,isAdmin} = await this.payloadExtracting(payload)
+        user.cart.items = []
+        user.cart.updatingTotals()
+        await this.userRepo.update({_id:user._id},user);
+        return user.cart
+    }
 }

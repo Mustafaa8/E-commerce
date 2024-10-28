@@ -29,4 +29,9 @@ export class CartController {
         @Param('quantity',ParseIntPipe) quantity:number){
         return this.cartServices.removeProductFromCart(req['user'],productId,quantity)
     }
+    @Delete('clear')
+    @UseGuards(AuthGuard)
+    clearItems(@Req() req:Request){
+        return this.cartServices.clearCart(req['user'])
+    }
 }
