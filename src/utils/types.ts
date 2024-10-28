@@ -28,5 +28,5 @@ export type ProductDataParams ={
 
 export type JwtPayload = {
     userId:string,
-    Admin:boolean
+    isAdmin:boolean
 }

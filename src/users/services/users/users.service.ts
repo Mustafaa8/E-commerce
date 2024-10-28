@@ -20,9 +20,9 @@ export class UsersService {
     }
     async payloadExtracting(payload:Promise<JwtPayload>){
         const payloadRes = await payload
-        const {userId,Admin} = payloadRes
+        const {userId,isAdmin} = payloadRes
         const user = await this.userRepo.findOne({where:{_id:new ObjectId(userId)}})
-        return {user,Admin}
+        return {user,isAdmin}
     }
     fetchUsers(){
         return this.userRepo.find()
@@ -45,9 +45,5 @@ export class UsersService {
     deleteUser(userId:ObjectId){
         return this.userRepo.delete({_id:userId})
     }
-    async getCart(payload:Promise<JwtPayload>){
-        const {user,Admin} = await this.payloadExtracting(payload)
-        return user.cart
-    }
-    
+   
 }

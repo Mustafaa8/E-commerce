@@ -14,11 +14,6 @@ export class UsersController {
     getAllUsers(){
         return this.userServices.fetchUsers()
     }
-    @Get('cart')
-    @UseGuards(AuthGuard)
-    async showUserCart(@Req() req:Request){
-        return this.userServices.getCart(req['user'])
-    }
     @Get(':id')
     @UseGuards(AuthGuard)
     getUserById(@Param('id',ObjectIdPipe) userId:ObjectId){
